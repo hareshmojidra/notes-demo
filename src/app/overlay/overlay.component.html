@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<div (click)="deleteNote()" class="deleteIcon">
+  <mat-icon aria-hidden="false" aria-label="Example icon" class="cursor" >delete</mat-icon>
+</div>
+<div class="padding10">
+  <input type="text" [(ngModel)]="value">
+</div>
+<div class="cursor">
+  <mat-grid-list cols="4" rowHeight="15px">
+    <mat-grid-tile *ngFor="let color of colors" [colspan]="color.cols" [rowspan]="color.rows"
+      [style.background]="color.color" (click)="saveText(color.color)">
+      {{color.text}}
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

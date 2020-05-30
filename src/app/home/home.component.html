@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="over">
+
+    <mat-toolbar>
+      <span>Filter</span>
+    </mat-toolbar>
+    <mat-list role="list" *ngFor="let color of sidecolors" class="cursor" (click)="matchedColorNotes(color.color); drawer.close()">
+      <mat-list-item role="listitem" [style.background]="color.color">
+        <mat-icon aria-label="Side nav toggle icon">checkmark</mat-icon>
+        {{color.text}}
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <mat-toolbar>
+    <mat-icon aria-label="Side nav toggle icon" (click)="drawer.toggle()" class="menuIconColor cursor">menu</mat-icon>
+    <span class="headerTxtColor">NOTES</span>
+  </mat-toolbar>
+
+  <div class="padding10">
+    <mat-card>
+        <input type="text" class="inputTxt" placeholder="Take a note" [(ngModel)]="value" (click)="onChange()">
+      <div *ngIf="selectColor" class="cursor colorEnimation">
+        <mat-grid-list cols="4" rowHeight="25px">
+          <mat-grid-tile *ngFor="let color of colors" [colspan]="color.cols" [rowspan]="color.rows"
+            [style.background]="color.color" (click)="saveText(color.color)">
+            {{color.text}}
+          </mat-grid-tile>
+        </mat-grid-list>
+      </div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="createNote" class="padding10 row">
+    <div class="padding10 column cardAnimation" *ngFor="let notes of notesArr">
+          <mat-card class="note"  [style.background]="notes.color" (click)="openDialog(notes.noteText)">
+            {{notes.noteText}}
+            <div class="date">{{myDate}}</div>
+          </mat-card>
+    </div>
+  </div>
+
+  <div *ngIf="matchedNotes" class="padding10 row">
+    <div class="padding10 column" *ngFor="let notes of matchedArry">
+          <mat-card class="note"  [style.background]="notes.color" (click)="openDialog(notes.noteText)">
+            {{notes.noteText}}
+            <div class="date">{{myDate}}</div>
+          </mat-card>
+    </div>
+  </div>
+
+</mat-drawer-container>
